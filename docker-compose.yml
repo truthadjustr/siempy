@@ -1,0 +1,72 @@
+version: '2'
+services:
+    ###################################################################
+    correlator:
+        image: docker.elastic.co/logstash/logstash-oss:6.0.0
+        volumes:
+            - ./correlator/recognizer.conf:/recognizer.conf
+        command: ["/usr/share/logstash/bin/logstash","-r","-f","/recognizer.conf"]
+        links:
+            - cache
+    cache:
+        image: redis:latest
+    ###################################################################
+    webconfig_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: webconfig
+        volumes:
+            - ./pyhandlers/webconfig_handler.py:/mainapp.py
+        links:
+            - cache
+    ###################################################################
+    failedlogon_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: failedlogon
+        volumes:
+            - ./pyhandlers/failedlogon_handler.py:/mainapp.py
+        links:
+            - cache
+    ###################################################################
+    foundrogueap_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: foundrogueap
+        volumes:
+            - ./pyhandlers/foundrogueap_handler.py:/mainapp.py
+        links:
+            - cache
+    ###################################################################
+    lostrogueap_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: lostrogueap
+        volumes:
+            - ./pyhandlers/lostrogueap_handler.py:/mainapp.py
+        links:
+            - cache
+    ###################################################################
+    interference_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: interference
+        volumes:
+            - ./pyhandlers/interference_handler.py:/mainapp.py
+        links:
+            - cache
+    ###################################################################
+    radius_handler:
+        image: siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: radius
+        volumes:
+            - ./pyhandlers/radius_handler.py:/mainapp.py
+        links:
+            - cache
