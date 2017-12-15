@@ -3,6 +3,7 @@ services:
     ###################################################################
     correlator:
         image: docker.elastic.co/logstash/logstash-oss:6.0.0
+        container_name: corel
         volumes:
             - ./correlator/recognizer.conf:/recognizer.conf
         command: ["/usr/share/logstash/bin/logstash","-r","-f","/recognizer.conf"]
@@ -10,6 +11,7 @@ services:
             - cache
     cache:
         image: redis:latest
+        container_name: cache
     ###################################################################
     webconfig_handler:
         image: siempy:latest
