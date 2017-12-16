@@ -22,6 +22,8 @@ services:
             - ./pyhandlers/webconfig_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
     ###################################################################
     failedlogon_handler:
         image: siempy:latest
@@ -32,6 +34,8 @@ services:
             - ./pyhandlers/failedlogon_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
     ###################################################################
     foundrogueap_handler:
         image: siempy:latest
@@ -42,6 +46,8 @@ services:
             - ./pyhandlers/foundrogueap_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
     ###################################################################
     lostrogueap_handler:
         image: siempy:latest
@@ -52,6 +58,8 @@ services:
             - ./pyhandlers/lostrogueap_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
     ###################################################################
     interference_handler:
         image: siempy:latest
@@ -62,6 +70,8 @@ services:
             - ./pyhandlers/interference_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
     ###################################################################
     radius_handler:
         image: siempy:latest
@@ -72,3 +82,13 @@ services:
             - ./pyhandlers/radius_handler.py:/mainapp.py
         links:
             - cache
+            - snmptrapsvr
+            - snmpdevice
+    ###################################################################
+    snmptrapsvr:
+        image: dchidell/docker-snmptrap:latest
+        container_name: snmptrapsvr
+    ###################################################################
+    snmpdevice:
+        image: polinux/snmpd:latest
+        container_name: snmpdevice
