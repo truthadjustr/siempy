@@ -11,3 +11,4 @@ print("failedlogon is ready")
 while True:
     for eventlog in pubsub.listen():
         print(eventlog['data'])
+        r.incr('failedlogon_count')
