@@ -9,6 +9,9 @@ services:
         command: ["/usr/share/logstash/bin/logstash","-r","-f","/recognizer.conf"]
         links:
             - cache
+        ports:
+            - 5140:5140/udp
+    ###################################################################
     cache:
         image: redis:latest
         container_name: cache
@@ -22,8 +25,7 @@ services:
             - ./pyhandlers/webconfig_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
     failedlogon_handler:
         image: siempy:latest
@@ -34,8 +36,7 @@ services:
             - ./pyhandlers/failedlogon_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
     foundrogueap_handler:
         image: siempy:latest
@@ -46,8 +47,7 @@ services:
             - ./pyhandlers/foundrogueap_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
     lostrogueap_handler:
         image: siempy:latest
@@ -58,8 +58,7 @@ services:
             - ./pyhandlers/lostrogueap_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
     interference_handler:
         image: siempy:latest
@@ -70,8 +69,7 @@ services:
             - ./pyhandlers/interference_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
     radius_handler:
         image: siempy:latest
@@ -82,13 +80,10 @@ services:
             - ./pyhandlers/radius_handler.py:/mainapp.py
         links:
             - cache
-            - snmptrapsvr
-            - snmpdevice
+            - snmpsim
     ###################################################################
-    snmptrapsvr:
-        image: dchidell/docker-snmptrap:latest
-        container_name: snmptrapsvr
-    ###################################################################
-    snmpdevice:
-        image: polinux/snmpd:latest
-        container_name: snmpdevice
+    snmpsim:
+        image: tandrup/snmpsim:latest
+        container_name: snmpsim
+        ports:
+            - 1610:161/udp 
