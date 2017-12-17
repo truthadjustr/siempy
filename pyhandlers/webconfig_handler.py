@@ -10,5 +10,6 @@ print("webconfig is ready")
 
 while True:
     for eventlog in pubsub.listen():
-        print(eventlog['data'])
-        r.incr('webconfig_count')
+        if isinstance(eventlog['data'], bytes):
+            print(eventlog['data'])
+            r.incr('webconfig_count')

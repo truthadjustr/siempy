@@ -10,5 +10,6 @@ print("lostrogueap is ready")
 
 while True:
     for eventlog in pubsub.listen():
-        print(eventlog['data'])
-        r.incr('lostrogueap_count')
+        if isinstance(eventlog['data'], bytes):
+            print(eventlog['data'])
+            r.incr('lostrogueap_count')

@@ -1,6 +1,7 @@
 import redis
 import pysnmp
 import time
+import json
 
 #r = redis.StrictRedis(host = "cache")
 r = redis.StrictRedis(host = "172.17.0.3")
@@ -36,16 +37,17 @@ print("all is ready")
 
 while True:
     for eventlog in pubsub.listen():
-        msg = eventlog['data']
-        if eventlog['channel'] == 'webconfig':
-            do_webconfig(msg)
-        elif eventlog['channel'] == 'failedlogon':
-            do_failedlogon(msg)
-        elif eventlog['channel'] == 'foundrogueap':
-            do_foundrogueap(msg)
-        elif eventlog['channel'] == 'lostrogueap':
-            do_lostrogueap(msg)
-        elif eventlog['channel'] == 'interference':
-            do_interference(msg)
-        elif eventlog['channel'] == 'radius':
-            do_radius(msg)
+        if isinstance(eventlog['data'], bytes):
+            msg = eventlog['data']
+            if eventlog['channel'] == 'webconfig':
+                do_webconfig(msg)
+            elif eventlog['channel'] == 'failedlogon':
+                do_failedlogon(msg)
+            elif eventlog['channel'] == 'foundrogueap':
+                do_foundrogueap(msg)
+            elif eventlog['channel'] == 'lostrogueap':
+                do_lostrogueap(msg)
+            elif eventlog['channel'] == 'interference':
+                do_interference(msg)
+            elif eventlog['channel'] == 'radius':
+                do_radius(msg)
