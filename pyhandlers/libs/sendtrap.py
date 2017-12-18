@@ -1,125 +1,24 @@
 import pysnmp
-import json
 from pysnmp.hlapi import *
 
-def sendtrap_failedlogon():
+def sendtrap(trapid,varbinds):
+
+    SnmpHost = ('172.25.0.2',162)
+    objident = '1.3.6.1.4.1.9746.10252.900.0.%d' % trapid
+
     errorIndication, errorStatus, errorIndex, varBinds = next(
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
+            UdpTransportTarget(SnmpHost),
             ContextData(),
             'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
+            NotificationType(ObjectIdentity(objident)).addVarBinds(
+                *varbinds  
             )
         )
     )
 
     if errorIndication:
         print(errorIndication)
-
-def sendtrap_foundrogueap():
-    errorIndication, errorStatus, errorIndex, varBinds = next(
-        sendNotification(
-            SnmpEngine(),
-            CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
-            ContextData(),
-            'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
-            )
-        )
-    )
-
-    if errorIndication:
-        print(errorIndication)
-
-def sendtrap_interference():
-    errorIndication, errorStatus, errorIndex, varBinds = next(
-        sendNotification(
-            SnmpEngine(),
-            CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
-            ContextData(),
-            'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
-            )
-        )
-    )
-
-    if errorIndication:
-        print(errorIndication)
-
-def sendtrap_lostrogueap():
-    errorIndication, errorStatus, errorIndex, varBinds = next(
-        sendNotification(
-            SnmpEngine(),
-            CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
-            ContextData(),
-            'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
-            )
-        )
-    )
-
-    if errorIndication:
-        print(errorIndication)
-
-def sendtrap_radius():
-    errorIndication, errorStatus, errorIndex, varBinds = next(
-        sendNotification(
-            SnmpEngine(),
-            CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
-            ContextData(),
-            'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
-            )
-        )
-    )
-
-    if errorIndication:
-        print(errorIndication)
-
-def sendtrap_webconfig():
-    errorIndication, errorStatus, errorIndex, varBinds = next(
-        sendNotification(
-            SnmpEngine(),
-            CommunityData('public'),
-            UdpTransportTarget(('172.25.0.2',162)),
-            ContextData(),
-            'trap',
-            NotificationType(
-                ObjectIdentity('1.3.6.1.6.3.1.1.5.2')
-            ).addVarBinds(
-                ('1.3.6.1.6.3.1.1.4.3.0','1.3.6.1.4.1.20408.4.1.1.2'),
-                ('1.3.6.1.2.1.1.1.0',OctetString('my system'))
-            )
-        )
-    )
-
-    if errorIndication:
-        print(errorIndication)
-
 
