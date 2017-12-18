@@ -1,6 +1,7 @@
 import redis
 import pysnmp
 import time
+from libs.sendtrap import *
 
 r = redis.StrictRedis(host = "cache")
 pubsub = r.pubsub()

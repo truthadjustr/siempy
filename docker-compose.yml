@@ -23,6 +23,7 @@ services:
         container_name: webconfig
         volumes:
             - ./pyhandlers/webconfig_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
@@ -34,6 +35,7 @@ services:
         container_name: failedlogon
         volumes:
             - ./pyhandlers/failedlogon_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
@@ -45,6 +47,7 @@ services:
         container_name: foundrogueap
         volumes:
             - ./pyhandlers/foundrogueap_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
@@ -56,6 +59,7 @@ services:
         container_name: lostrogueap
         volumes:
             - ./pyhandlers/lostrogueap_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
@@ -67,6 +71,7 @@ services:
         container_name: interference
         volumes:
             - ./pyhandlers/interference_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
@@ -78,6 +83,7 @@ services:
         container_name: radius
         volumes:
             - ./pyhandlers/radius_handler.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim

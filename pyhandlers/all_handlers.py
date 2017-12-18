@@ -2,6 +2,7 @@ import redis
 import pysnmp
 import time
 import json
+from libs.sendtrap import *
 
 #r = redis.StrictRedis(host = "cache")
 r = redis.StrictRedis(host = "172.17.0.3")
