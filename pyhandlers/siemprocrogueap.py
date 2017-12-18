@@ -5,12 +5,12 @@ from libs.sendtrap import *
 
 r = redis.StrictRedis(host = "cache")
 pubsub = r.pubsub()
-pubsub.subscribe("lostrogueap")
+pubsub.subscribe(["siemprocrogueap_found","siemprocrogueap_lost"])
 
-print("lostrogueap is ready")
+print("siemprocrogueap is ready")
 
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], bytes):
             print(eventlog['data'])
-            r.incr('lostrogueap_count')
+            r.incr('siemprocrogueap_count')

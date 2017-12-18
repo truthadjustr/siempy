@@ -5,12 +5,12 @@ from libs.sendtrap import *
 
 r = redis.StrictRedis(host = "cache")
 pubsub = r.pubsub()
-pubsub.subscribe("radius")
+pubsub.subscribe("siemprocjamming")
 
-print("radius is ready")
+print("siemprocjamming is ready")
 
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], bytes):
             print(eventlog['data'])
-            r.incr('radius_count')
+            r.incr('siemprocjamming_count')

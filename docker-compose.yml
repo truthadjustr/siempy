@@ -16,73 +16,61 @@ services:
         image: redis:latest
         container_name: cache
     ###################################################################
-    webconfig_handler:
+    siemprocwlclogin:
         image: siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
-        container_name: webconfig
+        container_name: siemprocwlclogin
         volumes:
-            - ./pyhandlers/webconfig_handler.py:/mainapp.py
+            - ./pyhandlers/siemprocwlclogin.py:/mainapp.py
             - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
     ###################################################################
-    failedlogon_handler:
+    siemprocwindowslogin:
         image: siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
-        container_name: failedlogon
+        container_name: siemprocwindowslogin
         volumes:
-            - ./pyhandlers/failedlogon_handler.py:/mainapp.py
+            - ./pyhandlers/siemprocwindowslogin.py:/mainapp.py
             - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
     ###################################################################
-    foundrogueap_handler:
+    siemprocrogueap:
         image: siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
-        container_name: foundrogueap
+        container_name: siemprocrogueap
         volumes:
-            - ./pyhandlers/foundrogueap_handler.py:/mainapp.py
+            - ./pyhandlers/siemprocrogueap.py:/mainapp.py
             - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
     ###################################################################
-    lostrogueap_handler:
+    siemprocjamming:
         image: siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
-        container_name: lostrogueap
+        container_name: siemprocjamming
         volumes:
-            - ./pyhandlers/lostrogueap_handler.py:/mainapp.py
+            - ./pyhandlers/siemprocjamming.py:/mainapp.py
             - ./pyhandlers/libs:/libs
         links:
             - cache
             - snmpsim
     ###################################################################
-    interference_handler:
+    siemprocwlcradiuslogin:
         image: siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
-        container_name: interference
+        container_name: siemprocwlcradiuslogin
         volumes:
-            - ./pyhandlers/interference_handler.py:/mainapp.py
-            - ./pyhandlers/libs:/libs
-        links:
-            - cache
-            - snmpsim
-    ###################################################################
-    radius_handler:
-        image: siempy:latest
-        environment:
-            - PYTHONUNBUFFERED=1
-        container_name: radius
-        volumes:
-            - ./pyhandlers/radius_handler.py:/mainapp.py
+            - ./pyhandlers/siemprocwlcradiuslogin.py:/mainapp.py
             - ./pyhandlers/libs:/libs
         links:
             - cache

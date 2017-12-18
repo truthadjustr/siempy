@@ -7,7 +7,7 @@ def sendtrap_failedlogon():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
@@ -27,7 +27,7 @@ def sendtrap_foundrogueap():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
@@ -47,7 +47,7 @@ def sendtrap_interference():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
@@ -67,7 +67,7 @@ def sendtrap_lostrogueap():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
@@ -87,7 +87,7 @@ def sendtrap_radius():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
@@ -107,7 +107,7 @@ def sendtrap_webconfig():
         sendNotification(
             SnmpEngine(),
             CommunityData('public'),
-            UdpTransportTarget(('172.25.0.3',162)),
+            UdpTransportTarget(('172.25.0.2',162)),
             ContextData(),
             'trap',
             NotificationType(
