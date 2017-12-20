@@ -2,7 +2,8 @@ version: '2'
 services:
     ###################################################################
     correlator:
-        image: docker.elastic.co/logstash/logstash-oss:6.0.0
+        #image: docker.elastic.co/logstash/logstash-oss:6.0.0
+        image: truthadjustr/siemcorr:latest
         container_name: corel
         volumes:
             - ./correlator/recognizer.conf:/recognizer.conf
@@ -17,7 +18,7 @@ services:
         container_name: cache
     ###################################################################
     siemprocwlclogin:
-        image: siempy:latest
+        image: truthadjustr/siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
         container_name: siemprocwlclogin
@@ -26,10 +27,10 @@ services:
             - ./pyhandlers/libs:/libs
         links:
             - cache
-            - snmpsim
+            - t252snmpagent
     ###################################################################
     siemprocwindowslogin:
-        image: siempy:latest
+        image: truthadjustr/siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
         container_name: siemprocwindowslogin
@@ -38,10 +39,10 @@ services:
             - ./pyhandlers/libs:/libs
         links:
             - cache
-            - snmpsim
+            - t252snmpagent
     ###################################################################
     siemprocrogueap:
-        image: siempy:latest
+        image: truthadjustr/siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
         container_name: siemprocrogueap
@@ -50,10 +51,10 @@ services:
             - ./pyhandlers/libs:/libs
         links:
             - cache
-            - snmpsim
+            - t252snmpagent
     ###################################################################
     siemprocjamming:
-        image: siempy:latest
+        image: truthadjustr/siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
         container_name: siemprocjamming
@@ -62,10 +63,10 @@ services:
             - ./pyhandlers/libs:/libs
         links:
             - cache
-            - snmpsim
+            - t252snmpagent
     ###################################################################
     siemprocwlcradiuslogin:
-        image: siempy:latest
+        image: truthadjustr/siempy:latest
         environment:
             - PYTHONUNBUFFERED=1
         container_name: siemprocwlcradiuslogin
@@ -74,12 +75,18 @@ services:
             - ./pyhandlers/libs:/libs
         links:
             - cache
-            - snmpsim
+            - t252snmpagent
     ###################################################################
-    snmpsim:
-        image: tandrup/snmpsim:latest
-        container_name: snmpsim
+    t252snmpagent:
+        image: truthadjustr/t252snmpagent:latest
+        #COPY t252snmpagent/entrypoint.sh /
+        #COPY t252snmpagent/siemevent.py /root/
+        container_name: t252snmpagent
         volumes:
-            - ./snmpsimdata:/usr/share/snmpsim/data
+            - ./var.siem:/var/siem
+            - ./t252snmpagent/:/root/
+            - ./t252snmpagent/entrypoint.sh:/entrypoint.sh
         ports:
             - 1610:161/udp 
+        links:
+            - cache

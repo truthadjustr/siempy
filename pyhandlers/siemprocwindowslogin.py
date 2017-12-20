@@ -9,6 +9,13 @@ r = redis.StrictRedis(host = "cache")
 pubsub = r.pubsub()
 pubsub.subscribe("siemprocwindowslogin")
 
+def update_snmpagent(count,remoteIp):
+    snmpmsg = {
+        "oident":"rfnSiemWindowsLoginIntruder", 
+        "param":[remoteIp]
+    }
+    r.publish("siemevent",json.dumps(snmpmsg))
+
 print("siemprocwindowslogin is ready")
 
 while True:
@@ -21,12 +28,17 @@ while True:
         try:
             splits = msg.split(' ')
             remoteIp = splits[0]
-            r.hincrby('siemprocwindowslogin_count',remoteIp,1)
+
+            r.sadd('rfnSiemWindowsLoginIntruder',remoteIp) 
+            r.hincrby('rfnSiemWindowsLoginIntruder_hitcount',remoteIp,1)
+
             k = 'failedlogon_' + str(remoteIp)
             count = r.incr(k)
             r.expire(k,60)
             
             host = socket.gethostname()
+
+            update_snmpagent(count,remoteIp)
 
             if count == 4:
                 print("ALERT failed logon!")
