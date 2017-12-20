@@ -11,6 +11,14 @@ pubsub.subscribe(["siemprocrogueap_found","siemprocrogueap_lost"])
 
 print("siemprocrogueap is ready")
 
+def update_snmpagent():
+    snmpmsg = {
+        "oident":"rfnSiemRogueAp",
+        "param":""
+    }
+    r.publish("siemevent",json.dumps(snmpmsg))
+
+
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], int): continue
@@ -23,6 +31,8 @@ while True:
             r.incr('siemprocrogueap_count')
             splits = msg.split(' ')
             host = socket.gethostname()
+    
+            update_snmpagent()
 
             if "Found Rogue AP!" in msg:
                 rogueMac  = splits[6]

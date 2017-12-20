@@ -11,6 +11,13 @@ pubsub.subscribe("siemprocjamming")
 
 print("siemprocjamming is ready")
 
+def update_snmpagent():
+    snmpmsg = {
+        "oident":"rfnSiemJammingSignal",
+        "param":""
+    }
+    r.publish("siemevent",json.dumps(snmpmsg))
+
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], int): continue
@@ -29,6 +36,8 @@ while True:
             rssi        = int(splits[13])
             noiseFloor  = int(splits[15])
             load        = int(splits[17])
+
+            update_snmpagent()
 
             trapid = 1
             varbinds = (

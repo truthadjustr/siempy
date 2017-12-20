@@ -11,6 +11,13 @@ pubsub.subscribe("siemprocwlclogin")
 
 print("siemprocwlclogin is ready")
 
+def update_snmpagent():
+    snmpmsg = {
+        "oident":"rfnSiemWlcLoginIntruder",
+        "param":""
+    }
+    r.publish("siemevent",json.dumps(snmpmsg))
+
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], int): continue
@@ -26,6 +33,8 @@ while True:
             key = 'siemprocwlclogin_' + str(remoteIp)
             count = r.incr(key)
             r.expire(key,60)
+
+            update_snmpagent()
 
             host = socket.gethostname()
 

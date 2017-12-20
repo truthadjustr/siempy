@@ -11,6 +11,13 @@ pubsub.subscribe("siemprocwlcradiuslogin")
 
 print("siemprocwlcradiuslogin is ready")
 
+def update_snmpagent():
+    snmpmsg = {
+        "oident":"rfnSiemWlcRadiusLoginIntruder",
+        "param":""
+    }
+    r.publish("siemevent",json.dumps(snmpmsg))
+
 while True:
     for eventlog in pubsub.listen():
         if isinstance(eventlog['data'], int): continue
@@ -28,6 +35,8 @@ while True:
             count = r.incr(key)
             r.expire(key,60)
             host = socket.gethostname()
+            update_snmpagent()
+
             if count == 4:
                 print("ALERT Radius failed logon")
                 trapid = 9

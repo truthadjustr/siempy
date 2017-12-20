@@ -30,7 +30,7 @@ while True:
             remoteIp = splits[0]
 
             r.sadd('rfnSiemWindowsLoginIntruder',remoteIp) 
-            r.hincrby('rfnSiemWindowsLoginIntruder_hitcount',remoteIp,1)
+            r.hincrby('siemprocwindowslogin_hitcount',remoteIp,1)
 
             k = 'failedlogon_' + str(remoteIp)
             count = r.incr(k)
