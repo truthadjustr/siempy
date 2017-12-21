@@ -15,11 +15,9 @@ t252snmpagent.
 * docker-compose.yml
 
 **Shared folder for Logstash:**
-* log
 * log/udp_5140.log
 
 **Handlers for each string pattern found by grok:**
-* pyhandlers
 * pyhandlers/siemprocrogueap.py
 * pyhandlers/siemprocwlcradiuslogin.py
 * pyhandlers/siemprocwindowslogin.py
@@ -27,7 +25,6 @@ t252snmpagent.
 * pyhandlers/siemprocjamming.py
 
 **Common function library:**
-* pyhandlers/libs
 * pyhandlers/libs/sendtrap.py
 * pyhandlers/libs/__init__.py
 
@@ -39,11 +36,9 @@ t252snmpagent.
 * var.siem
 
 **Logstash Configuration:**
-* correlator
 * correlator/recognizer.conf
 
 **Code Snippet References:**
-* reference
 * reference/default-v1-trap2.py
 * reference/v2c-trap-with-notification-objects.py
 * reference/test.py
@@ -51,7 +46,6 @@ t252snmpagent.
 * reference/container-test.c
 
 **SNMP Agent Config:**
-* t252snmpagent
 * t252snmpagent/entrypoint.sh
 * t252snmpagent/siemevent.py
 * t252snmpagent/snmpd.conf
