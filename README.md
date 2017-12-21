@@ -31,6 +31,7 @@ t252snmpagent.
 **Container Prep:**
 * containers/siempy/Dockerfile
 * containers/siemcorr/Dockerfile
+* containers/t252snmpagent/
 
 **Shared Folder for t252snmpagent:**
 * var.siem
@@ -44,8 +45,3 @@ t252snmpagent.
 * reference/test.py
 * reference/pass_persist.py
 * reference/container-test.c
-
-**SNMP Agent Config:**
-* t252snmpagent/entrypoint.sh
-* t252snmpagent/siemevent.py
-* t252snmpagent/snmpd.conf
