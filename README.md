@@ -7,8 +7,9 @@ output is also in syslog. In the current design, configured output destination i
 Logstash receiving input is the best place in order to have full control. The default control
 provided by Graylog in its web interface is too limiting. 
 
-An **SNMP** service is also provided. The **Redis** cache serves a the in-memory hash map key value 
-store that works in tandem with the python programming logic.
+An **SNMP** agent service is also provided by t252snmpagent container. The **Redis** cache serves as the in-memory hash 
+store that works in tandem with the python logic. Redis is also used for communicating the logstash to python handlers and python handlers to
+t252snmpagent.
 
 **The Main Orchestrator File**
 * docker-compose.yml
