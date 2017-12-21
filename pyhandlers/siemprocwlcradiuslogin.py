@@ -39,6 +39,7 @@ while True:
 
             if count == 4:
                 print("ALERT Radius failed logon")
+                # SIEMSNMP_TRAPS_v100.mib: OBJECTS { eventId, wlcIp, attackerIp, radiusUsername }
                 trapid = 9
                 varbinds = (
                     ('1.3.6.1.4.1.9746.10252.900.1.5.0',Integer(0)),

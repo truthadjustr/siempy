@@ -85,8 +85,8 @@ services:
         container_name: t252snmpagent
         volumes:
             - ./var.siem:/var/siem
-            - ./t252snmpagent/:/root/
-            - ./t252snmpagent/entrypoint.sh:/entrypoint.sh
+            - ./containers/t252snmpagent/:/root/
+            - ./containers/t252snmpagent/entrypoint.sh:/entrypoint.sh
         ports:
             - 1610:161/udp 
         links:
