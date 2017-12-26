@@ -1,4 +1,4 @@
-PATTERN000 <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: ALERT! WLAN attack detected. TYPE = %{NUMBER:type} NAME = %{WORD:name} APMAC = %{MAC:apmac} ATTACKERMAC = %{MAC:attackermac} count = %{NUMBER:count} 
+PATTERN000 <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: ALERT! WLAN attack detected. TYPE = %{NUMBER:type} NAME = %{WORD:name} APMAC = %{MAC:apmac} ATTACKERMAC = %{MAC:attackermac} count%{SPACE}=%{SPACE}%{NUMBER:count} 
 PATTERN001 <%{POSINT:prio}>%{SPACE}+id=%{WORD:id} sn=C0EAE4F5F08E time=\"%{TIMESTAMP_ISO8601:time}\" fw=%{IPV4:fw} pri=%{NUMBER:pri} c=%{NUMBER:c} gcat=%{NUMBER:gcat} m=1209 srcMac=%{MAC:srcMac} src=%{HOSTPORT:src}:%{WORD:x0} srcZone=%{WORD:srcZone} dstMac=%{MAC:dstMac} dst=%{HOSTPORT:dst} proto=(?<proto>\w+/\w+) rcvd=%{NUMBER:rcvd} n=%{NUMBER:n} fw_action=\"%{WORD:fw_action}\"
 PATTERN002 <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: WARNING! WIFI Interference detected at channel %{NUMBER:channel} \( (?<megahertz>[0-9]+)MHz \) \( RSSI %{NUMBER:rssi} NF %{INT:nf} LOAD %{INT:load} \)
 PATTERN003 <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: Found Rogue AP! mac = %{MAC:mac} freq = %{POSINT:freq} MHz \(Channel %{NUMBER:Channel}\) ssid = %{WORD:ssid}
@@ -6,3 +6,5 @@ PATTERN004 <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%
 PATTERN005 sent RADIUS challenge for user id '%{WORD:user}' to %{IPV4:ipaddr}
 PATTERN006 : Webconfig: login failure via HTTP from %{IPV4:ipaddr}
 PATTERN007 %{IPORHOST:machine} An account failed to log on
+PATTERNABC <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: ALERT! WLAN attack detected. %{GREEDYDATA:attackinfo}
+PATTERNDEF TYPE = %{NUMBER:type} NAME = %{WORD:name} APMAC = %{MAC:apmac} ATTACKERMAC = %{MAC:attackermac} count%{SPACE}=%{SPACE}%{NUMBER:count}
