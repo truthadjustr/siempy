@@ -5,6 +5,25 @@ import json
 import socket
 from libs.sendtrap import *
 
+'''
+{
+                 "PRI" => "129",
+        "redischannel" => "siemprocjamming",
+            "@version" => "1",
+                  "nf" => "-89",
+               "appid" => "1126",
+                 "app" => "APSPECTRAL",
+                "rssi" => "37",
+                "load" => "16",
+    "syslog_timestamp" => "Jan  1 18:37:42",
+                "host" => "172.25.0.1",
+          "@timestamp" => 2017-12-26T06:45:43.415Z,
+             "channel" => "149",
+             "message" => "<129>Jan  1 18:37:42 APSPECTRAL[1126]: WARNING! WIFI Interference detected at channel 149 ( 5745MHz ) ( RSSI 37 NF -89 LOAD 16 )\n",
+           "megahertz" => "5745"
+}
+'''
+
 r = redis.StrictRedis(host = "cache")
 pubsub = r.pubsub()
 pubsub.subscribe("siemprocjamming")
@@ -26,19 +45,19 @@ while True:
         msg = obj['message']
 
         try:
-            print(eventlog['data'])
             r.incr('siemprocjamming_count')
-            splits = msg.split(' ')
 
-            '''
-            host = socket.gethostname()
-            jammingType = int(splits[2])
-            frequency   = int(splits[7])
-            rssi        = int(splits[13])
-            noiseFloor  = int(splits[15])
-            load        = int(splits[17])
+            pri = obj['PRI']
+            nf = obj['nf']
+            moduleid = obj['moduleid']
+            module = obj['module']
+            rssi = obj['rssi']
+            load = obj['load']
+            channel = obj['channel']
+            megahertz = obj['megahertz']
 
-            '''
+            print("VALUES: {0} {1} {2} {3} {4} {5} {6} {7}".format(pri,nf,moduleid,module,rssi,load,channel,megahertz)) 
+
             update_snmpagent()
 
             trapid = 1
