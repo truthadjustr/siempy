@@ -27,7 +27,6 @@ while True:
 
         try:
             print(eventlog['data'])
-            r.incr('siemprocwlclogin_count')
             splits = msg.split(' ')
             remoteIp = splits[7]
             key = 'siemprocwlclogin_' + str(remoteIp)

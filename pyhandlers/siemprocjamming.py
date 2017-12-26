@@ -45,8 +45,6 @@ while True:
         msg = obj['message']
 
         try:
-            r.incr('siemprocjamming_count')
-
             pri = obj['PRI']
             nf = obj['nf']
             moduleid = obj['moduleid']

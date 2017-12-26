@@ -30,8 +30,6 @@ while True:
         msg = obj['message']
 
         try:
-            r.incr('siemprocethspoof_count')
-
             attackermac = obj['attackermac']
 
             print("VALUES: {0}".format(attackermac)) 

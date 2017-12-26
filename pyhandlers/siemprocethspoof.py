@@ -55,8 +55,6 @@ while True:
         msg = obj['message']
 
         try:
-            r.incr('siemprocethspoof_count')
-
             id = obj['id']
             srcMac = obj['srcMac']
             srcZone = obj['srcZone']

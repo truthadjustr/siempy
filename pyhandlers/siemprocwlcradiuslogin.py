@@ -27,7 +27,6 @@ while True:
 
         try:
             print(eventlog['data'])
-            r.incr('siemprocwlcradiuslogin_count')
             splits = log.split(' ')
             remoteIp = splits[9]
             username = splits[7].strip("'")

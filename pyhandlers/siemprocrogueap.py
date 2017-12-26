@@ -28,7 +28,6 @@ while True:
 
         try:
             print(eventlog['data'])
-            r.incr('siemprocrogueap_count')
             splits = msg.split(' ')
             host = socket.gethostname()
     
