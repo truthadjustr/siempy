@@ -2,3 +2,5 @@ mibs/
 var.siem/
 log/
 *.swp
+.bash_history
+.viminfo

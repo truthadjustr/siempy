@@ -30,6 +30,7 @@ while True:
             r.incr('siemprocjamming_count')
             splits = msg.split(' ')
 
+            '''
             host = socket.gethostname()
             jammingType = int(splits[2])
             frequency   = int(splits[7])
@@ -37,9 +38,12 @@ while True:
             noiseFloor  = int(splits[15])
             load        = int(splits[17])
 
+            '''
             update_snmpagent()
 
             trapid = 1
+            
+            '''
             varbinds = (
                 ('1.3.6.1.4.1.9746.10252.900.1.5.0',Integer(0)),
                 ('1.3.6.1.4.1.9746.10252.900.1.1.0',OctetString(host)),
@@ -50,5 +54,6 @@ while True:
                 ('1.3.6.1.4.1.9746.10252.900.1.18.0',Integer(load))
             )
             sendtrap(trapid,varbinds) 
+            '''
         except:
             print("EXCEPTION: " + str(msg))
