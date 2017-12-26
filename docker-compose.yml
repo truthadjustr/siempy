@@ -79,6 +79,30 @@ services:
             - cache
             - t252snmpagent
     ###################################################################
+    siemprocethspoof:
+        image: truthadjustr/siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: siemprocethspoof
+        volumes:
+            - ./pyhandlers/siemprocethspoof.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
+        links:
+            - cache
+            - t252snmpagent
+    ###################################################################
+    siemprocwlanattack:
+        image: truthadjustr/siempy:latest
+        environment:
+            - PYTHONUNBUFFERED=1
+        container_name: siemprocwlanattack
+        volumes:
+            - ./pyhandlers/siemprocwlanattack.py:/mainapp.py
+            - ./pyhandlers/libs:/libs
+        links:
+            - cache
+            - t252snmpagent
+    ###################################################################
     t252snmpagent:
         image: truthadjustr/t252snmpagent:latest
         #COPY t252snmpagent/entrypoint.sh /
