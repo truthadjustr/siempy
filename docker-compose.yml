@@ -13,7 +13,7 @@ services:
         links:
             - cache
         ports:
-            - 5140:5140/udp
+            - 5149:5140/udp
     ###################################################################
     cache:
         image: redis:latest
