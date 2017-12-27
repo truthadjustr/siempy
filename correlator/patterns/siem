@@ -8,3 +8,4 @@ PATTERN006 : Webconfig: login failure via HTTP from %{IPV4:ipaddr}
 PATTERN007 %{IPORHOST:machine} An account failed to log on
 PATTERNABC <%{POSINT:prio}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{WORD:module}\[%{POSINT:moduleid}\]: ALERT! WLAN attack detected. %{GREEDYDATA:attackinfo}
 PATTERNDEF TYPE = %{NUMBER:type} NAME = %{WORD:name} APMAC = %{MAC:apmac} ATTACKERMAC = %{MAC:attackermac} count%{SPACE}=%{SPACE}%{NUMBER:count}
+PATTERNWIN <%{POSINT:pri}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{GREEDYDATA} Workstation Name: %{WORD:workstation}   Source Network Address: %{IPV4:ipaddr}   Source Port:  %{POSINT:srcport}
